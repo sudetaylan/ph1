@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_routines.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: staylan <staylan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/11 17:57:35 by staylan           #+#    #+#             */
+/*   Updated: 2025/07/11 18:10:38 by staylan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	check_philo_died(t_data *data, t_philo *philo)
@@ -9,7 +21,6 @@ static int	check_philo_died(t_data *data, t_philo *philo)
 	{
 		if (get_time_ms() - get_last_meal_time(&philo[i]) > data->time_to_die)
 		{
-			printf("%llu ===> %llu  == %llu\n", get_time_ms(), get_last_meal_time(&philo[i]), get_time_ms() - get_last_meal_time(&philo[i]));
 			end_condition(data, &philo[i], "died");
 			return (1);
 		}
@@ -66,7 +77,7 @@ void	*philo_routines(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->data->number_of_philos == 1)
 	{
-		philo_take_forks(philo);
+		handle_fork_taking(philo);
 		while (!check_sim_ended(philo->data))
 			usleep(100);
 		pthread_mutex_unlock(&philo->data->forks[0]);
@@ -74,7 +85,7 @@ void	*philo_routines(void *arg)
 	}
 	while (!check_sim_ended(philo->data))
 	{
-		philo_take_forks(philo);
+		handle_fork_taking(philo);
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
