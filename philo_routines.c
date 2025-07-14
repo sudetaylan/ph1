@@ -6,7 +6,7 @@
 /*   By: staylan <staylan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:57:14 by staylan           #+#    #+#             */
-/*   Updated: 2025/07/12 21:32:19 by staylan          ###   ########.fr       */
+/*   Updated: 2025/07/14 16:52:04 by staylan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int	philo_take_forks(t_philo *philo)
 		pthread_mutex_lock(&(philo->data->forks[philo->r_fork]));
 		print_status(philo, "has taken a fork");
 	}
+	return (1);
 }
 
 void	handle_fork_taking(t_philo *philo)
