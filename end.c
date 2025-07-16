@@ -6,7 +6,7 @@
 /*   By: staylan <staylan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:56:45 by staylan           #+#    #+#             */
-/*   Updated: 2025/07/11 17:56:52 by staylan          ###   ########.fr       */
+/*   Updated: 2025/07/16 18:09:12 by staylan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ void	destroy_mutex(t_data *data, t_philo *philo)
 	free(philo);
 }
 
-void	end_condition(t_data *data, t_philo *philo, const char *msg)
+
+void	end_condition(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->is_ended_lock);
 	data->is_ended = 1;
 	pthread_mutex_unlock(&philo->data->is_ended_lock);
-	pthread_mutex_lock(&data->print_lock);
-	printf("%lld %d %s\n",
-		get_time_ms() - philo->data->start_time, philo->id, msg);
-	pthread_mutex_unlock(&(data->print_lock));
 }

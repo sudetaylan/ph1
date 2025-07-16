@@ -6,7 +6,7 @@
 /*   By: staylan <staylan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:57:25 by staylan           #+#    #+#             */
-/*   Updated: 2025/07/12 21:16:22 by staylan          ###   ########.fr       */
+/*   Updated: 2025/07/16 18:09:19 by staylan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 void		*philo_routines(void *arg);
 int			arg_control(char **argv);
 void		print_status(t_philo *philo, const char *msg);
-void		end_condition(t_data *data, t_philo *philo, const char *msg);
+void		end_condition(t_data *data, t_philo *philo);
 long long	get_time_ms(void);
 int			ft_atoi(const char *str);
 int			init_tdata(char **argv, t_data *data, int argc);

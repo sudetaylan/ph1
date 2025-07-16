@@ -6,7 +6,7 @@
 /*   By: staylan <staylan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:57:35 by staylan           #+#    #+#             */
-/*   Updated: 2025/07/11 18:10:38 by staylan          ###   ########.fr       */
+/*   Updated: 2025/07/16 18:09:02 by staylan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static int	check_philo_died(t_data *data, t_philo *philo)
 	{
 		if (get_time_ms() - get_last_meal_time(&philo[i]) > data->time_to_die)
 		{
-			end_condition(data, &philo[i], "died");
+			end_condition(data, &philo[i]);
+			pthread_mutex_lock(&data->print_lock);
+			printf("%lld %d %s\n",
+				get_time_ms() - philo->data->start_time, philo->id, "died");
+			pthread_mutex_unlock(&(data->print_lock));
 			return (1);
 		}
 		i++;
@@ -45,7 +49,7 @@ static int	check_all_eaten(t_data *data, t_philo *philo)
 		pthread_mutex_unlock(&philo[i].meal_lock);
 		i++;
 	}
-	end_condition(data, &philo[0], "All philosophers have eaten enough!");
+	end_condition(data, &philo[0]);
 	return (1);
 }
 
